@@ -1,0 +1,39 @@
+@import 'variables';
+
+.footer-main{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+
+    &_logo{
+        display: flex;
+        align-items:center;
+        font-size: 18px;
+        font-weight: 700;
+        gap: 0.5rem;
+        cursor: pointer;
+    }
+    &_select{
+        display: flex;
+        align-items:center;
+        
+        select{
+            padding: 0.5rem;
+            background-color:$ui_back;
+            border-color: $ui_border;
+            border-width: 0.5px;
+            border-radius:0.3rem;
+
+            &:hover{
+                border-color: $black_color;
+                border-width: 0.5px;
+            }
+        }
+    }
+}
+.footer-other{
+    border-top: 1px solid $ui_border;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}

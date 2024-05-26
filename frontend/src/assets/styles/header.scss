@@ -1,0 +1,108 @@
+@import 'variables';
+
+.header-main{
+    display: flex;
+    justify-content: space-between;
+
+    &_burger{
+        display: none;
+        @media (max-width: 768px){
+            display: flex;
+            align-items:center;
+        }
+    }
+    &_logo{
+        display: flex;
+        align-items:center;
+        font-size: 18px;
+        font-weight: 700;
+        gap: 0.5rem;
+        cursor: pointer;
+    }
+    &_nav{
+        display: flex;
+        align-items:center;
+        gap: 1.5rem;
+
+        a{
+            color: $text_header;
+        }
+        @media (max-width: 768px){
+            display: none;
+        }
+    }
+    &_search{
+        display: flex;
+        align-items:center;
+        justify-content: end;
+
+        &_form{
+            display: inline-flex;
+            align-items:center;
+            width: 280px;
+            margin-right: 1rem;
+           
+            input{
+                width: 100%;
+                background-color:$ui_back;
+                padding: 0.5rem;
+                padding-left: 2rem;
+                border-color: $ui_border;
+                border-width: 1px;
+                border-radius:0.3rem;
+
+                &:hover{
+                    border-color: $black_color;
+                    border-width: 0.5px;
+                }
+            }
+            @media (max-width: 640px){
+                display: none;
+            }
+        }
+        &_hidden{
+            display: none;
+            cursor: pointer;
+            margin-right: 0.5rem;
+
+            @media (max-width: 640px){
+                display: inline-flex;
+            }
+        }
+        &_users{
+            display: flex;
+            gap: 1rem;
+
+            &_hidden{
+                @media (max-width: 640px){
+                    display: none;
+                }
+            }
+        }
+    }
+}
+.header-hidden{
+    display: flex;
+    padding-top: 1rem;
+
+    &_search{
+        display: inline-flex;
+        align-items:center;
+        width: 100%;
+        
+        input{
+            width: 100%;
+            background-color:$ui_back;
+            padding: 0.5rem;
+            padding-left: 2rem;
+            border-color: ui_border;
+            border-width: 1px;
+            border-radius:0.3rem;
+        }
+    }
+    .search_icon{
+        @media (max-width: 640px){
+            left: 1.5rem;
+        }
+    }
+}

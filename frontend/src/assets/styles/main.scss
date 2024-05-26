@@ -1,0 +1,60 @@
+@import 'variables';
+
+header{
+  padding-bottom: 0.5rem;
+  padding-top: 1rem;
+  background-color:$primary_color;
+  box-shadow: 0 3px 2px 0 #0000000d;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+}
+
+body {
+  background-color: $primary_color;
+  margin: 0;
+  font-family: "Fira Sans", sans-serif;
+}
+
+footer{
+  background-color:$primary_color;
+}
+a{
+  text-decoration: none;
+}
+select{
+  outline: none;
+}
+input{
+  outline: none;
+}
+.container{
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  width: 100%;
+
+  @media (max-width: 1024px){
+    max-width: 768px;
+  }
+  @media (max-width: 768px){
+    max-width: 640px;
+  }
+  @media (max-width: 640px){
+    max-width: 320px;
+  }
+  @media (max-width: 375px){
+    max-width: 250px;
+  }
+}
+.search_icon{
+  position: relative;
+  left: 1.5rem;
+  opacity: 0.5;
+
+  @media (max-width: 640px){
+    left: 0;
+  }
+}    
