@@ -10,9 +10,9 @@ import support from '../assets/support.png';
 const companies = ref([
     { id: 1, icon: company1 },
     { id: 2, icon: company2 },
-    { id: 4, icon: company1 },
-    { id: 5, icon: company2 },
-    { id: 6, icon: company1 }
+    { id: 3, icon: company1 },
+    { id: 4, icon: company2 },
+    { id: 5, icon: company1 }
 ]);
 const advantages = ref([
       { id: 1, text_xl: 'Бесплатная доставка', text_sm: 'Бесплатная доставка при заказе на сумму свыше 1000 руб', icon: box},
