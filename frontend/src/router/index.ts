@@ -19,7 +19,6 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Category',
     component: Category,
   },
-  // Добавьте больше маршрутов по мере необходимости
 ];
 const router = createRouter({
     history: createWebHistory(),

@@ -1,0 +1,74 @@
+@import 'variables';
+
+.catalog{
+    background-color: $second_back;
+    padding-bottom: 1rem;
+}
+.catalog-main{
+    display: flex;
+    gap: 2rem;
+    padding: 1rem;
+
+    &_left{
+        width: 200px;
+        @media (max-width:640px){
+            display: none;
+        }
+    }
+    &_right{ 
+        margin-top: 1rem;
+
+        &_button{
+            display: none;
+            @media (max-width:640px){
+                display: block;
+            }
+        }
+        &_product{
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 2rem;
+            transition-duration: .15s;
+            transition-property: all;
+            transition-timing-function: cubic-bezier(.4,0,.2,1);
+
+            &_card{
+                display: flex;
+                flex-direction: column;
+    
+                &_img{
+                    margin-bottom: 0.5rem;
+    
+                    img{
+                        object-fit: cover;
+                        border-radius:1rem;
+                    }
+                }
+                &_text{
+                    a{
+                        font-size: 18px;
+                        color: inherit;
+                        text-decoration: inherit;
+                    }
+                    a:hover{
+                        color: $catalog_color;
+                    }
+                    .price{
+                        display:flex;
+                        justify-content: space-between;
+                        margin-top: 3px;
+                        span{
+                            font-weight: 600;
+                        }
+                    }
+                }
+            }
+            @media (max-width:1024px){
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+            @media (max-width:640px){
+                grid-template-columns: repeat(1, minmax(0, 1fr));
+            }
+        }
+    }
+}
