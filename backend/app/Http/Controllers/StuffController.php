@@ -7,10 +7,9 @@ use Illuminate\Http\Request;
 
 class StuffController extends Controller
 {
-
+   
     public function index()
     {
-        // Получаем все товары из базы данных
         $stuffs = Stuff::all();
 
         // Возвращаем вид с товарами
@@ -42,5 +41,22 @@ class StuffController extends Controller
 
         // Перенаправление пользователя после успешного создания товара
         return redirect()->route('stuffs.create')->with('success', 'Stuff created successfully!');
+    }
+    public function destroy(Request $request, $id)
+    {
+        // Найти товар по идентификатору
+        $stuff = Stuff::findOrFail($id);
+
+        // Удалить товар
+        $stuff->delete();
+
+        // Перенаправить на предыдущую страницу или куда-то еще
+        return redirect()->back()->with('success', 'Stuff deleted successfully');
+    }
+    public function indexFront() 
+    {
+        // Получаем все товары из базы данных
+        $stuffs1 = Stuff::all();
+        return response()->json($stuffs1);
     }
 }

@@ -11,6 +11,11 @@
                 <li>{{ $stuff->type }}</li>
                 <li>{{ $stuff->rating }}</li>
         </ul>
+        <form action="{{ route('stuffs.destroy', $stuff->id) }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button type="submit">Delete</button>
+        </form>
         @endforeach
     </div>
 @endsection

@@ -35,7 +35,5 @@
     @yield('content')
 </div>
 
-<!-- Скрипты -->
-<script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

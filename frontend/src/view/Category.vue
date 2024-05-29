@@ -2,9 +2,9 @@
 import { ref } from 'vue';
 import T_short from '../assets/t_short.jpg';
 import Hoodie from '../assets/hoodie.jpg';
-import Sneekers from '../assets/sneekers.jpeg';
+import Sneekers from '../assets/sneekers.jpg';
 import Trousers from '../assets/trousers.jpg';
-import Accessories from '../assets/Accessories.jpg';
+import Accessories from '../assets/accessories.jpg';
 
 const categoryes = ref([
     { id: 1, name: 'Футболки', icon: T_short },
