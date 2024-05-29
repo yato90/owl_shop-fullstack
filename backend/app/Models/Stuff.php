@@ -12,7 +12,7 @@ class Stuff extends Model
         'price', 
         'img',
         'type',
-        'raiting',
+        'rating',
     ];
 
 

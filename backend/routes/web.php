@@ -5,6 +5,11 @@ use App\Http\Controllers\StuffController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
-Route::get('/stuffs', [StuffController::class, 'index'])->name('stuffs.index');
+Route::get('/stuffs/index', [StuffController::class, 'index'])->name('stuffs.index');
+// Маршрут для отображения формы создания товара
+Route::get('/stuffs/create', [StuffController::class, 'create'])->name('stuffs.create');
+
+// Маршрут для сохранения созданного товара
+Route::post('/stuffs', [StuffController::class, 'store'])->name('stuffs.store');
