@@ -25,4 +25,3 @@ export const getAllStuff = async (): Promise<any> => {
   }
 };
 
-// Другие методы для работы с продуктами...

@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import company1 from '../assets/company1.png';
 import company2 from '../assets/company2.png';
 import box from '../assets/box.png';
 import cashback from '../assets/cashback.png';
 import secure from '../assets/secure.png';
 import support from '../assets/support.png';
+import { useStore } from 'vuex';
 
 const companies = ref([
     { id: 1, icon: company1 },
@@ -21,6 +22,8 @@ const advantages = ref([
       { id: 4, text_xl: 'Поддержка', text_sm: 'Круглосуточная онлайн-поддержка', icon: support}
 ]);
 
+const store = useStore();
+const bestStuff = computed(() => store.getters.bestStuff);
 </script>
 
 <template>
@@ -35,9 +38,20 @@ const advantages = ref([
         </div>
     </div>
     <div class="home-product">
-        <h2>Популярные товары</h2>
+        <h2>Лучшие товары</h2>
         <div class="home-product_item">
-            дописать
+            <div v-for="stuff in bestStuff" :key="stuff.id" class="home-product_item_card">
+                <a href="#" class="home-product_item_card_img">
+                  <img :src="`http://localhost:3000/src/assets/${stuff.img}.jpg`" :alt="stuff.name" width="300" height="248" />
+                </a>
+                <div class="home-product_item_card_text"> 
+                  <a href="#">{{ stuff.name }}</a>
+                  <div class="price">
+                    <span>{{ stuff.price }} ₽</span>
+                    {{ stuff.rating }}R
+                  </div>
+                </div>
+              </div>
         </div>
     </div> 
     <div class="home-advantages">
