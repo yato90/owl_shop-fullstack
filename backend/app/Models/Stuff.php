@@ -24,4 +24,18 @@ class Stuff extends Model
     {
         return $this->belongsTo(Type::class);
     }
+    public function ratings()
+    {
+        return $this->hasMany(RatingUser::class);
+    }
+
+    public function calculateRating()
+    {
+        $averageRating = $this->ratings()->avg('rating');
+        return round($averageRating, 2);
+    }
+    public function info()
+    {
+        return $this->hasMany(StuffInfo::class);
+    }
 }

@@ -21,4 +21,8 @@ class User extends Model
     {
         return $this->hasOne(Basket::class);
     }
+    public function ratings()
+    {
+        return $this->hasMany(RatingUser::class);
+    }
 }
