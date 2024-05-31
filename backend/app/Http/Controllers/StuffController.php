@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Stuff;
+use App\Models\Type;
 use Illuminate\Http\Request;
 
 class StuffController extends Controller
@@ -17,7 +18,8 @@ class StuffController extends Controller
     }
     public function create()
     {
-        return view('stuffs.create');
+        $types = Type::all();
+        return view('stuffs.create', compact('types'));
     }
     public function store(Request $request)
     {
@@ -26,7 +28,7 @@ class StuffController extends Controller
             'name' => 'required|string',
             'price' => 'required|numeric',
             'img' => 'required|string',
-            'type' => 'required|string',
+            'type_id' => 'required|exists:types,id',
             'rating' => 'required|numeric',
         ]);
 
@@ -35,10 +37,9 @@ class StuffController extends Controller
             'name' => $request->name,
             'price' => $request->price,
             'img' => $request->img,
-            'type' => $request->type,
+            'type_id' => $request->type_id,
             'rating' => $request->rating,
         ]);
-
         // Перенаправление пользователя после успешного создания товара
         return redirect()->route('stuffs.create')->with('success', 'Stuff created successfully!');
     }

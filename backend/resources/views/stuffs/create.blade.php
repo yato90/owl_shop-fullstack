@@ -18,8 +18,12 @@
                 <input type="text" class="form-control" id="img" name="img">
             </div>
             <div class="form-group">
-                <label for="type">Type:</label>
-                <input type="text" class="form-control" id="type" name="type">
+                <label for="type_id">Type:</label>
+                <select class="form-control" id="type_id" name="type_id">
+                    @foreach($types as $type)
+                        <option value="{{ $type->id }}">{{ $type->name }}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="form-group">
                 <label for="rating">rating:</label>

@@ -11,7 +11,7 @@ class Stuff extends Model
         'name',
         'price', 
         'img',
-        'type',
+        'type_id',
         'rating',
     ];
 
@@ -19,5 +19,9 @@ class Stuff extends Model
     public function basket_stuff()
     {
         return $this->hasOne(Basket_stuff::class);
+    }
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
     }
 }
