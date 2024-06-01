@@ -1,0 +1,12 @@
+@import 'variables';
+
+.auth-page {
+    padding: 20px;
+    text-align: center;
+    background-color:$second_back;
+
+    span{
+        color:$text_header;
+        cursor: pointer;
+    }
+}

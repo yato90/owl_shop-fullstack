@@ -81,9 +81,11 @@ onBeforeUnmount(() => {
                     </svg>
                 </div>
                 <div class="header-main_search_users">
-                    <a class = "header-main_search_users_hidden" href="#">
-                        <img :src="account" alt= "logo" width="24" height="24"/>
-                    </a>
+                    <router-link to="/auth" >
+                        <a class = "header-main_search_users_hidden" href="#">
+                            <img :src="account" alt= "logo" width="24" height="24"/>
+                        </a>
+                    </router-link>
                     <a href="#" @click="toggleWish">
                         <img :src="basket" alt= "logo" width="24" height="24"/>
                     </a>
