@@ -13,11 +13,11 @@ let minPrice = ref(150);
 let maxPrice = ref(9000);
 
 const categoryOptions = [
-  { value: 'tshirts', label: 'Футболки' },
-  { value: 'sneakers', label: 'Кеды' },
-  { value: 'hoodie', label: 'Худи' },
-  { value: 'trousers', label: 'Штаны' },
-  { value: 'accessories', label: 'Аксесуары' },
+  { value: '1', label: 'Худи' },
+  { value: '2', label: 'Футболки' },
+  { value: '3', label: 'Кеды' },
+  { value: '4', label: 'Штаны' },
+  { value: '5', label: 'Аксесуары' },
 ];
 const sizeOptions = [
   { value: 'large', label: 'Большой' },
@@ -63,13 +63,26 @@ function updateSelectedColor(newSelected: string[]) {
 function updateSelectedRaiting(newSelected: string[]) {
   selectedRaiting.value = newSelected;
 }
+const emit = defineEmits(['apply-filters', 'reset-filters']);
+
+const applyFilters = () => {
+  emit('apply-filters', {
+    minPrice: minPrice.value,
+    maxPrice: maxPrice.value,
+    categories: selectedCategories.value,
+    sizes: selectedSizes.value,
+    colors: selectedColor.value,
+    rating: selectedRaiting.value,
+  });
+};
 function resetFilters() {
   selectedCategories.value = [];
   selectedSizes.value = [];
   selectedColor.value = [];
   selectedRaiting.value = [];
-  minPrice.value = 150;
-  maxPrice.value = 9000;
+  minPrice.value = 0;
+  maxPrice.value = 10000;
+  emit('reset-filters');
 }
 </script>
 
@@ -107,7 +120,7 @@ function resetFilters() {
     :selected="selectedRaiting"
     @update:selected="updateSelectedRaiting"
   />
-  <Button>Поиск</Button>
+  <Button @click="applyFilters">Поиск</Button>
   <Button @click="resetFilters">Очистить фильтры</Button>
 </template>
 

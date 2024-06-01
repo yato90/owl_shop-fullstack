@@ -86,10 +86,44 @@ class StuffController extends Controller
         // Перенаправить на предыдущую страницу или куда-то еще
         return redirect()->back()->with('success', 'Stuff deleted successfully');
     }
+
     public function indexFront() 
     {
         // Получаем все товары из базы данных
         $stuffs1 = Stuff::all();
         return response()->json($stuffs1);
+    }
+    public function filter(Request $request)
+    {
+        $query = Stuff::query();
+
+        // Применяем фильтры к таблице stuffs
+        if ($request->has('minPrice')) {
+            $query->where('price', '>=', $request->input('minPrice'));
+        }
+        if ($request->has('maxPrice')) {
+            $query->where('price', '<=', $request->input('maxPrice'));
+        }
+        if ($request->has('categories') && !empty($request->input('categories'))) {
+            $query->whereIn('type_id', $request->categories);
+        }
+        if ($request->has('rating') && !empty($request->input('rating'))) {
+            $query->whereIn('rating', $request->rating);
+        }
+        // Применяем фильтры к таблице stuffs_info
+        if ($request->has('sizes')) {
+            $query->whereHas('info', function($q) use ($request) {
+                $q->whereIn('title', ['size'])->whereIn('description', (array) $request->input('sizes'));
+            });
+        }
+        if ($request->has('colors')) {
+            $query->whereHas('info', function($q) use ($request) {
+                $q->whereIn('title', ['color'])->whereIn('description', (array) $request->input('colors'));
+            });
+        }
+
+        $stuffs = $query->with('info')->get();
+
+        return response()->json($stuffs);
     }
 }

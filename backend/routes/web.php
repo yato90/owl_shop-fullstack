@@ -11,8 +11,8 @@ Route::get('/stuffs/index', [StuffController::class, 'index'])->name('stuffs.ind
 // Маршрут для отображения формы создания товара
 Route::get('/stuffs/create', [StuffController::class, 'create'])->name('stuffs.create');
 
+// Маршрут для изменения рейтинга товара
 Route::post('/stuffs/{stuff}/rate', [StuffController::class, 'rateStuff'])->name('stuffs.rate');
-
 // Маршрут для сохранения созданного товара
 Route::post('/stuffs', [StuffController::class, 'store'])->name('stuffs.store');
 // Маршрут для удаленния  товара

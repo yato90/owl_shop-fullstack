@@ -39,4 +39,20 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
+    <script>
+        let infoCount = 1;
+
+        function addInfo() {
+            const infoDiv = document.getElementById('info');
+            const newInfoDiv = document.createElement('div');
+            newInfoDiv.innerHTML = `
+                <label for="info[${infoCount}][title]">Info Title:</label>
+                <input type="text" id="info[${infoCount}][title]" name="info[${infoCount}][title]" required>
+                <label for="info[${infoCount}][description]">Description:</label>
+                <textarea id="info[${infoCount}][description]" name="info[${infoCount}][description]" required></textarea>
+            `;
+            infoDiv.appendChild(newInfoDiv);
+            infoCount++;
+        }
+    </script>
 @endsection

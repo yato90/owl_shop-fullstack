@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { ref, watch, onMounted, onBeforeUnmount } from 'vue';
+import { useStore } from 'vuex';
 import burgerMenu from './burgerMenu.vue';
 import wishList from './wishList.vue';
 import logo from '../../assets/logo.png';
@@ -10,6 +11,8 @@ const isSearchVisability = ref(false);
 const windowWidth = ref(window.innerWidth);
 const menuOpen = ref(false); 
 const wishOpen = ref(false);
+const store = useStore();
+const searchQuery = ref('');
 
 const toggleMenu = () => {
   menuOpen.value = !menuOpen.value;
@@ -26,6 +29,13 @@ const updateWindowWidth = () => {
 const toggleSearchHidden = () => {
     isSearchVisability.value = !isSearchVisability.value;
 };
+const updateSearch = () => {
+    store.commit('setSearchQuery', searchQuery.value);
+};
+
+watch(searchQuery, (newQuery) => {
+    store.commit('setSearchQuery', newQuery);
+});
 
 onMounted(() => {
     window.addEventListener('resize', updateWindowWidth);
@@ -61,7 +71,7 @@ onBeforeUnmount(() => {
                         data-v-e8d572f6="">
                         <path fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" d="M221.09 64a157.09 157.09 0 1 0 157.09 157.09A157.1 157.1 0 0 0 221.09 64Z"></path><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M338.29 338.29L448 448"></path>
                     </svg>
-                    <input type="text" placeholder="Поиск товара">
+                    <input v-model="searchQuery" @input="updateSearch" placeholder="Поиск товара">
                 </form>
                 <div class="header-main_search_hidden" @click="toggleSearchHidden">
                     <svg class="search_icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 

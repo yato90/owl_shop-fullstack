@@ -1,13 +1,24 @@
 <script setup lang="ts">
 import Filters from './filters.vue';
+import { useStore } from 'vuex';
 
 const props = defineProps({
   isOpen: Boolean
 });
 const emit = defineEmits(['close']);
+const store = useStore();
 
 const closeMenu = () => {
   emit('close');
+};
+const applyFilters = (filters: any) => {
+  store.commit('setFilters', filters);
+  store.dispatch('fetchFilteredStuff');
+};
+
+const resetFilters = () => {
+  store.commit('setFilters', {});
+  store.dispatch('fetchFilteredStuff');
 };
 </script>
 
@@ -15,7 +26,7 @@ const closeMenu = () => {
     <transition name="slide">
         <div class="filter-menu" v-if="props.isOpen">
             <button class="close-button" @click="closeMenu">X</button>
-            <Filters/>
+            <Filters @apply-filters="applyFilters" @reset-filters="resetFilters"/>
         </div>
     </transition>
 </template>
