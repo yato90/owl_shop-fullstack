@@ -19,7 +19,7 @@ const closeMenu = () => {
                 <router-link to="/" ><li><a>Главная</a></li></router-link>
                 <router-link to="/catalog" ><li><a>Каталог</a></li></router-link>
                 <router-link to="/category" ><li><a>Категории</a></li></router-link>
-                <li><a href="#">Аккаунт</a></li>
+                <router-link to="/auth" ><li><a href="#">Аккаунт</a></li></router-link>
                 </ul>
             </nav>
         </div>

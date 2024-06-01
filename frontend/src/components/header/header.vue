@@ -101,7 +101,7 @@ onBeforeUnmount(() => {
                     data-v-e8d572f6="">
                     <path fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" d="M221.09 64a157.09 157.09 0 1 0 157.09 157.09A157.1 157.1 0 0 0 221.09 64Z"></path><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M338.29 338.29L448 448"></path>
                 </svg>
-                <input type="text" placeholder="Поиск товара">
+                <input v-model="searchQuery" @input="updateSearch" placeholder="Поиск товара">
             </form>
         </div>
     </header>

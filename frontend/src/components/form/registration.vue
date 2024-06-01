@@ -8,7 +8,6 @@ const password = ref('');
 const confirmPassword = ref('');
 
 const register = () => {
-  // Implement your registration logic here
 };
 </script>
 
