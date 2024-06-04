@@ -1,15 +1,18 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import Filters from '../components/filters.vue';
 import Button from '../components/ui/button.vue';
 import FilterMenu from '../components/filterMenu.vue';
+import { useRoute } from 'vue-router';
 import { useStore } from 'vuex';
 
 const filterMenu = ref(false);
+
 const toggleFilterMenu = () => {
   filterMenu.value = !filterMenu.value;
 }
 const store = useStore();
+const route = useRoute();
 
 const stuffs = computed(() => store.getters.allStuff);
 const loading = computed(() => store.getters.isLoading);
@@ -25,6 +28,15 @@ const resetFilters = () => {
   store.commit('setFilters', {});
   store.dispatch('fetchFilteredStuff');
 };
+
+// Получение категории из URL
+const selectedCategory:any = ref(route.query.category);
+
+onMounted(() => {
+  if (selectedCategory.value) {
+    applyFilters({ categories: [selectedCategory.value] });
+  }
+});
 </script>
 
 <template>
@@ -32,7 +44,7 @@ const resetFilters = () => {
     <FilterMenu :isOpen="filterMenu"  @close="toggleFilterMenu" />
       <div class="catalog-main container">
           <div class="catalog-main_left">
-            <Filters @apply-filters="applyFilters" @reset-filters="resetFilters" />
+            <Filters :selectedCategory="selectedCategory" @apply-filters="applyFilters" @reset-filters="resetFilters" />
           </div>
           <div class="catalog-main_right">
             <Button class="catalog-main_right_button" @click="toggleFilterMenu">Фильтры</Button>

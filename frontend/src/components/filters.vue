@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import Price from "./ui/price.vue";
 import FilterCheckbox from './ui/filterCheckbox.vue';
 import Button from './ui/button.vue';
@@ -9,8 +9,8 @@ import yellow from '../assets/ui/yellow.png';
 import green from '../assets/ui/green.png';
 import black from '../assets/ui/black.png';
 
-let minPrice = ref(150);
-let maxPrice = ref(9000);
+let minPrice = ref(0);
+let maxPrice = ref(10000);
 
 const categoryOptions = [
   { value: '1', label: 'Худи' },
@@ -84,6 +84,19 @@ function resetFilters() {
   maxPrice.value = 10000;
   emit('reset-filters');
 }
+
+const props = defineProps({
+  selectedCategory: {
+    type: String,
+    default: null
+  }
+});
+// Применение выбранной категории при загрузке
+onMounted(() => {
+  if (props.selectedCategory) {
+    selectedCategories.value = [props.selectedCategory];
+  }
+});
 </script>
 
 <template>
