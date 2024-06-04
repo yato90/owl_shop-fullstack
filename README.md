@@ -62,6 +62,9 @@ Backend: http://localhost
 
 **Docker**: Docker файлы и конфигурация Docker Compose находятся в корневой директории проекта.
 
+## Схема бд
+![Описание изображения](БД.drawio.png)
+
 ## Использование
 **Добавление товара**: Перейти в http://localhost/stuffs/create. Посмотреть созданные по http://localhost/stuffs/index
 
