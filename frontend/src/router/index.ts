@@ -3,6 +3,7 @@ import HomePage from '../view/Home.vue';
 import Catalog from '../view/Catalog.vue';
 import Category from '../view/Category.vue';
 import Auth from '../view/Auth.vue';
+import Profile  from '../view/Profile.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -25,10 +26,27 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Auth',
     component: Auth,
   },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile,
+    meta: { requiresAuth: true },
+  },
 ];
 const router = createRouter({
     history: createWebHistory(),
     routes,
+});
+
+router.beforeEach((to, from, next) => {
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+  const token = localStorage.getItem('token');
+
+  if (requiresAuth && !token) {
+    next('/auth');
+  } else {
+    next();
+  }
 });
 
 export default router;

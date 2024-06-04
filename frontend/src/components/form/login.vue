@@ -1,18 +1,30 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { loginUser  } from '../../api/auth';
 import Button from '../ui/button.vue';
 
 const email = ref('');
 const password = ref('');
+const router = useRouter();
 
-const login = () => {
-  // Implement your login logic here
+const login = async () => {
+    try {
+        await loginUser({ 
+            email: email.value, 
+            password: password.value 
+        });
+        // Перенаправление на страницу профиля
+        router.push('/profile');
+    } catch (error) {
+        console.error('Ошибка входа:', error);
+    }
 };
-
 </script>
+
 <template>
     <div class="login-form">
-        <form @submit.prevent="handleSubmit">
+        <form @submit.prevent="login">
             <div class="login-form_input">
                 <label for="email">Email</label>
                 <input type="email" id="email" v-model="email" required>

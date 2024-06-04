@@ -1,19 +1,31 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import Button from '../ui/button.vue';
+import { useRouter } from 'vue-router';
+import { registerUser  } from '../../api/auth';
 
-const name = ref('');
 const email = ref('');
 const password = ref('');
-const confirmPassword = ref('');
+const passwordConfirmation = ref('');
+const router = useRouter();
 
-const register = () => {
+const Register = async () => {
+  try {
+    await registerUser({
+        email: email.value,
+        password: password.value,
+    });
+    // Перенаправление на страницу профиля
+    router.push('/profile');
+  } catch (error) {
+    console.error('Ошибка регистрации', error);
+  }
 };
 </script>
 
 <template>
     <div class="registration-form">
-        <form @submit.prevent="handleSubmit">
+        <form @submit.prevent="Register">
             <div class="registration-form_input">
                 <label for="email">Email</label>
                 <input type="email" id="email" v-model="email" required>
@@ -24,7 +36,7 @@ const register = () => {
             </div>
             <div class="registration-form_input">
                 <label for="confirmPassword">Повторить пароль</label>
-                <input type="password" id="confirmPassword" v-model="confirmPassword" required>
+                <input type="password" id="confirmPassword" v-model="passwordConfirmation" required>
             </div>
             <Button type="submit">Зарегистрироваться</Button>
         </form>

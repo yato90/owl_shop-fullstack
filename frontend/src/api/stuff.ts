@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from "axios";
+import baseURL from "./index";
 
-const baseURL: string | undefined = "http://localhost/api";
+//const baseURL: string | undefined = "http://localhost/api";
 
 const api = axios.create({
   baseURL,

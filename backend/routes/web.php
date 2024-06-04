@@ -18,6 +18,7 @@ Route::post('/stuffs', [StuffController::class, 'store'])->name('stuffs.store');
 // Маршрут для удаленния  товара
 Route::delete('/stuffs/{id}', [StuffController::class, 'destroy'])->name('stuffs.destroy');
 
-Route::middleware('web')->group(function () {
+Route::middleware('api')->group(function () {
     require __DIR__.'/api.php';
 });
+
