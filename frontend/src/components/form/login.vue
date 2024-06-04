@@ -4,12 +4,15 @@ import { useRouter } from 'vue-router';
 import { loginUser  } from '../../api/auth';
 import Button from '../ui/button.vue';
 
-const email = ref('');
-const password = ref('');
-const router = useRouter();
+let email = ref('');
+let password = ref('');
+let router = useRouter();
+let isLoading = ref(false);
+let errorForm = ref(false);
 
 const login = async () => {
     try {
+        isLoading.value = true;
         await loginUser({ 
             email: email.value, 
             password: password.value 
@@ -17,7 +20,10 @@ const login = async () => {
         // Перенаправление на страницу профиля
         router.push('/profile');
     } catch (error) {
+        errorForm.value = true;
         console.error('Ошибка входа:', error);
+    } finally {
+        isLoading.value = false;
     }
 };
 </script>
@@ -34,6 +40,8 @@ const login = async () => {
                 <input type="password" id="password" v-model="password" required>
             </div>
             <Button type="submit">Войти</Button>
+            <div v-if="isLoading" class="loader">Loading...</div>
+            <div v-if="errorForm" class="error">Неправильные данные</div>
         </form>
     </div>
 </template>
@@ -66,6 +74,21 @@ input{
     border-width: 1px;
     margin-bottom: 1rem;
     padding: 0.75rem 1rem;
+}
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+.error{
+    color:red;
 }
 </style>
   
