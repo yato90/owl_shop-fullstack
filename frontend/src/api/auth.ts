@@ -35,4 +35,5 @@ export const logoutUser = async () => {
     } catch (error) {
         throw error;
     }
+    window.location.reload();
 };
