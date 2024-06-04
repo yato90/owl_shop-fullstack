@@ -1,0 +1,17 @@
+@import 'variables';
+
+.profile-page {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding: 0.5rem;
+
+    &_left{
+        display: flex;
+        flex-direction: column;
+        padding: 0.5rem;
+        background-color:$second_back;
+        border-radius:5px;
+    }
+}

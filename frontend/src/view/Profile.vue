@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { logoutUser  } from '../api/auth';
 import { useRouter } from 'vue-router';
+import Button from '../components/ui/button.vue';
 
 const router = useRouter();
 
@@ -15,18 +16,20 @@ const logout = async() => {
 </script>
 
 <template>
-    <div class="profile-page">
-        <h1>Профиль</h1>
-        <p>Добро пожаловать,</p>
-        <button @click="logout">Logout</button>
+    <div class="container">
+        <div class="profile-page">
+            <div class="profile-page_left">
+                <h1>Мой аккаунт</h1>
+                <p>Добро пожаловать</p>
+                <p>email: в процессе</p>
+                <Button @click="logout">Выйти</Button>
+            </div>
+            <div class="profile-page_right"></div>
+        </div>
     </div>
 </template>
   
 <style scoped>
-.profile-page {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
+@import '../assets/styles/Profile.scss';
 </style>
   

@@ -34,6 +34,7 @@
                     <label for="info[0][description]">Description:</label>
                     <textarea id="info[0][description]" name="info[0][description]" required></textarea>
                 </div>
+                <span>для фильтров: size(large, medium, small) color(red, blue, yellow. green, black)</span>
             </div>
             <button type="button" onclick="addInfo()">Add More Info</button>
             <button type="submit" class="btn btn-primary">Submit</button>
