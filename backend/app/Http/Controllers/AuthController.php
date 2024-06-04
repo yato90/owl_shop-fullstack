@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Basket;
 use Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -37,6 +38,10 @@ class AuthController extends Controller
         if (!Auth::attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
+        // Проверка наличия корзины у пользователя и создание новой, если ее нет
+        $busket = Basket::firstOrCreate(['user_id' => Auth::id()]);
+        // Обновление активности корзины
+        $busket->update(['deactivated_at' => null]); 
 
         $user = $request->user();
         $token = $user->createToken('auth_token')->plainTextToken;
@@ -47,7 +52,7 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         $request->user()->tokens()->delete();
-
+        Basket::where('user_id', Auth::id())->update(['deactivated_at' => now()]);
         return response()->json(['message' => 'Logged out successfully']);
     }
 }

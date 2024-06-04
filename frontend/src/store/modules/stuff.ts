@@ -1,5 +1,5 @@
 import { Module } from 'vuex';
-import { getAllStuff, Stuff, StuffFilters, getFilteredStuff } from '../../api/stuff.ts';
+import { getAllStuff, Stuff, StuffFilters, getFilteredStuff, getBasketStuff } from '../../api/stuff.ts';
 
 interface StuffState {
   items: Stuff[];
@@ -18,6 +18,7 @@ const stuffModule: Module<StuffState, any> = {
     searchQuery: '',
     filteredItems: [],
     filters: {},
+    basket:{},
   },
   mutations: {
     setItems(state, items: Stuff[]) {
@@ -37,6 +38,9 @@ const stuffModule: Module<StuffState, any> = {
     },
     setFilters(state, filters: any) {
       state.filters = filters;
+    },
+    setBasket(state, basket: Stuff[]) {
+      state.basket = basket;
     },
   },
   actions: {
@@ -64,10 +68,24 @@ const stuffModule: Module<StuffState, any> = {
         commit('setLoading', false);
       }
     },
+    async fetchBasketStuff({ commit }) {
+      commit('setLoading', true);
+      try {
+        const basket = await getBasketStuff();
+        commit('setBasket', basket);
+      } catch (error) {
+        console.error('Error fetching stuff:', error);
+      } finally {
+        commit('setLoading', false);
+      }
+    },
   },
   getters: {
     allStuff(state): Stuff[] {
       return state.items;
+    },
+    basketStuff(state): Stuff[] {
+      return state.basket;
     },
     isLoading(state): boolean {
       return state.loading;

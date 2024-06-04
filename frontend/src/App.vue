@@ -6,7 +6,7 @@ import { useStore } from 'vuex';
 
 const store = useStore();
 const fetchStuff = async () => {
-  await store.dispatch('fetchAllStuff');
+  await store.dispatch('fetchAllStuff',);
 };
 onMounted(() => {
   fetchStuff();

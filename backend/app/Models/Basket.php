@@ -10,6 +10,7 @@ class Basket extends Model
 {
     protected $fillable = [
         'user_id',
+        'deactivated_at',
     ];
 
     public function user()
@@ -19,5 +20,9 @@ class Basket extends Model
     public function basket_stuff()
     {
         return $this->hasMany(Basket_stuff::class);
+    }
+    public function isActive()
+    {
+        return is_null($this->deactivated_at);
     }
 }

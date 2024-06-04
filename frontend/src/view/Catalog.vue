@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
+import { addToBusket } from '../api/stuff.ts';
 import Filters from '../components/filters.vue';
 import Button from '../components/ui/button.vue';
 import FilterMenu from '../components/filterMenu.vue';
@@ -18,6 +19,8 @@ const stuffs = computed(() => store.getters.allStuff);
 const loading = computed(() => store.getters.isLoading);
 const searchStuff = computed(() => store.getters.searchStuff);
 const filteredStuff = computed(() => store.getters.filteredStuff);
+// Получение категории из URL
+const selectedCategory:any = ref(route.query.category);
 
 const applyFilters = (filters: any) => {
   store.commit('setFilters', filters);
@@ -28,9 +31,6 @@ const resetFilters = () => {
   store.commit('setFilters', {});
   store.dispatch('fetchFilteredStuff');
 };
-
-// Получение категории из URL
-const selectedCategory:any = ref(route.query.category);
 
 onMounted(() => {
   if (selectedCategory.value) {
@@ -60,6 +60,7 @@ onMounted(() => {
                       <span>{{ stuffSearch.price }} ₽</span>
                       {{ stuffSearch.rating }}R
                     </div>
+                    <Button @click="addToBusket(stuffSearch.id)">Добавить в корзину</Button>
                   </div>
               </div>
               <div v-else-if="filteredStuff.length > 0" v-for="filterStuff in filteredStuff" :key="filterStuff.id" class="catalog-main_right_product_card 2">
@@ -72,6 +73,7 @@ onMounted(() => {
                     <span>{{ filterStuff.price }} ₽</span>
                     {{ filterStuff.rating }}R
                   </div>
+                  <Button @click="addToBusket(filterStuff.id)">Добавить в корзину</Button>
                 </div>
               </div>
               <div v-else v-for="stuff in stuffs" :key="stuff.id" class="catalog-main_right_product_card test">
@@ -84,6 +86,7 @@ onMounted(() => {
                     <span>{{ stuff.price }} ₽</span>
                     {{ stuff.rating }}R
                   </div>
+                  <Button @click="addToBusket(stuff.id)">Добавить в корзину</Button>
                 </div>
               </div>
             </section>

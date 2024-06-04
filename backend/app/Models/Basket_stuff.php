@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Basket_stuff extends Model
 {
     protected $fillable = [
-        'name',
         'basket_id', 
         'stuff_id',
     ];
