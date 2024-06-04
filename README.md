@@ -36,6 +36,10 @@ cd owl_shop-fullstack
 ```bash
 docker-compose up --build --detach
 ```
+Установите зависимости laravel:
+```bash
+docker exec owl_shop-fullstack-backend-1 composer i
+```
 Выполните миграции базы данных в контейнере Laravel:
 ```bash
 docker exec owl_shop-fullstack-backend-1 php artisan migrate
