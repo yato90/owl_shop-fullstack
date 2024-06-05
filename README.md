@@ -62,3 +62,6 @@ docker exec owl_shop-fullstack-backend-1 php artisan migrate
 - **Поиск и фильтрация**: Используйте интерфейс пользователя на фронтенде для поиска и фильтрации товаров.
 - **Регистрация и авторизация**: Используйте формы регистрации и входа на фронтенде.
 - **Корзина:** Войдите в систему и используйте функционал корзины для добавления товаров.
+
+[![Stargazers repo roster for @yato90/owl_shop-fullstack](https://reporoster.com/stars/yato90/owl_shop-fullstack)](https://github.com/yato90/owl_shop-fullstack/stargazers)
+[![Forkers repo roster for @yato90/owl_shop-fullstack](https://reporoster.com/forks/yato90/owl_shop-fullstack)](https://github.com/yato90/owl_shop-fullstack/network/members)
